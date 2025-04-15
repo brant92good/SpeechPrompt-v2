@@ -1,7 +1,0 @@
-name: "AcC_accentdb"
-taskrc:
-  merge: True
-datarc:
-  root_path: /home/yukai/s2u/accentdb/data
-  batch_size: 16
-  num_workers: 8
