@@ -74,6 +74,11 @@ if __name__ == "__main__":
     """
     python runner.py --model GSLM --downstream SCR_google_speech_commands --action
     """
+    
+    """
+    python runner.py --downstream SCR_google_speech_commands
+    python runner.py --downstream FSD_asvspoof
+    """
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", help="which backbone spoken language model", default="GSLM", choices=["GSLM"])
