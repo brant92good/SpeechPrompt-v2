@@ -11,29 +11,15 @@ import numpy as np
 
 import torch
 import tqdm
-from .cpc_feature_reader import (
-    CpcFeatureReader,
-)
+
 from .hubert_feature_reader import (
     HubertFeatureReader,
 )
-from .logmel_feature_reader import (
-    LogMelFeatureReader,
-)
-from .w2v2_feature_reader import (
-    Wav2VecFeatureReader,
-)
-
 
 def get_feature_reader(feature_type):
-    if feature_type == "logmel":
-        return LogMelFeatureReader
-    elif feature_type == "hubert":
+
+    if feature_type == "hubert":
         return HubertFeatureReader
-    elif feature_type == "w2v2":
-        return Wav2VecFeatureReader
-    elif feature_type == "cpc":
-        return CpcFeatureReader
     else:
         raise NotImplementedError(f"{feature_type} is not supported.")
 
