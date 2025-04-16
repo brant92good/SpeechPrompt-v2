@@ -2,6 +2,6 @@ name: "SCR_google_speech_commands"
 taskrc:
   merge: True
 datarc:
-  root_path: /storage/SpeechPrompt/datasets/speech_commands
+  root_path: /home/brant/storage/SpeechPrompt/datasets/speech_commands
   batch_size: 16
   num_workers: 12

@@ -1,4 +1,4 @@
-storage_dir: /home/brant/storage/GSLM
+storage_dir: /home/brant/Projects/clean-SP-v2/storage/GSLM
 
 prompt_param_filter:
   - "sep"
