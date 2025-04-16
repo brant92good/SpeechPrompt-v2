@@ -148,6 +148,12 @@ if __name__ == "__main__":
     python verbalizer.py --downstream SCR_google_speech_commands --action generate_verbalizer --method freq
     python verbalizer.py --downstream SCR_google_speech_commands --action verbalize --method freq
     """
+
+    """
+    python verbalizer.py --downstream SCR_google_speech_commands --method freq
+    python verbalizer.py --downstream FSD_asvspoof --method freq
+    """
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--downstream", help="the downstream task to process", required=True, default="SCR_google_speech_commands"
