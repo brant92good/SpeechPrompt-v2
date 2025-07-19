@@ -88,7 +88,7 @@ class PromptTrainer(FairseqTrainer):
             #  Save Base Prompt Model  #
             ############################
             base_prompt_model_path = Path(filename).parent / "base_prompt_model.pt"
-            self._save_base_model(state_dict, base_prompt_model_path) if not base_prompt_model_path.is_file() else None
+            self._save_base_model(state_dict, base_prompt_model_path) if not base_prompt_model_path.is_file() else None # here basically proved the base_prompt_model doesn't modify during training process
 
             ######################
             #    Save Prompts    #

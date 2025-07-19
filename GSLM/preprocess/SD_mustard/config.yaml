@@ -1,0 +1,12 @@
+name: "SD_mustard"
+taskrc:
+  merge: True
+  no_overlap: True
+datarc:
+  root_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/mustard/utterances_final_wav
+  output_path: /home/brant/Projects/clean-SP-v2/storage/GSLM/s2u_data/SD_mustard
+  json_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/mustard/sarcasm_data.json
+  k_fold: 0
+  speaker_dependent: True
+  batch_size: 32
+  num_workers: 2

@@ -1,0 +1,8 @@
+name: "FSD_asvspoof"
+taskrc:
+  merge: True
+datarc:
+  root_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/asvspoof/LA
+  output_path: /home/brant/Projects/clean-SP-v2/storage/GSLM/s2u_data/asvspoof
+  batch_size: 16
+  num_workers: 8

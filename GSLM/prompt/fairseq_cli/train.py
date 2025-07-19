@@ -3,6 +3,14 @@
 #
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
+
+"""
+Key modifications from Fairseq:
+1. The script imports PromptTrainer from fairseq_usr.trainer instead of using the default fairseq Trainer.
+2. The cli_main() function has been modified to accept parser and input arguments directly, rather than parsing them itself.
+3. A dump_args() function has been added to save the input arguments to a file.
+"""
+
 """
 Train a new model on one or across multiple GPUs.
 """

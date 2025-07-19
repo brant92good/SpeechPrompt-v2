@@ -61,9 +61,10 @@ def mapping_table(file_path, method):
         for i, t in enumerate(label_sorted):
             mapping_table[t] = src_sorted[i]
 
-    elif method == "identity":
-        for i, t in enumerate(label_sorted):
-            mapping_table[t] = t
+    ###not used and potentially bugged###
+    # elif method == "identity":
+    #     for i, t in enumerate(label_sorted):
+    #         mapping_table[t] = t
 
     elif method == "learnable":
         for i, t in enumerate(label_sorted):

@@ -66,6 +66,21 @@ def slice_by_length(data, max_len=400):
 
 
 def make_batches(lines, args, task, max_positions):
+    """
+    Tokenizes input lines and yields Fairseq-compatible batches.
+
+    Args:
+        lines (List[str]): Input text lines to be tokenized and batched.
+        args (Namespace): Arguments including batch size and token limits.
+        task (Task): Fairseq task defining dictionaries and dataset structure.
+        max_positions (int): Maximum number of positions/tokens allowed by the model.
+
+    Yields:
+        Batch: Namedtuple with fields:
+            - ids: List of example IDs in the batch
+            - src_tokens: Tensor of input token IDs
+            - src_lengths: Tensor of input lengths
+    """
     tokens = [task.source_dictionary.encode_line(src_str, add_if_not_exist=False).long() for src_str in lines]
     lengths = [t.numel() for t in tokens]
     itr = task.get_batch_iterator(
@@ -100,6 +115,7 @@ def main(args):
         pass
 
     # if args.max_tokens is None and args.max_sentences is None:
+    # ensure reproducibility
     if args.common.seed is not None:
         np.random.seed(args.common.seed)
         utils.set_torch_seed(args.common.seed)
@@ -155,7 +171,6 @@ def main(args):
     output_path.parent.mkdir(parents=True, exist_ok=True)
     out_data = {}
     output_file = output_path
-
     data = []
     with open(arg_input, "r") as f:
         lines = f.readlines()
@@ -216,7 +231,8 @@ def main(args):
         }
 
         results = []
-        if models[0].cfg.linear_verbalizer:
+        
+        if models[0].cfg.linear_verbalizer: ## issue: can't enter this if branch
             models[0].eval()
             src_len = sample["net_input"]["src_tokens"].size()[1]
             max_len = int(args.generation.max_len_a * int(src_len) + args.generation.max_len_b)
@@ -256,15 +272,25 @@ def main(args):
                 pbar.update(1)
                 start_id += 1
         else:
-            translations = task.inference_step(generator, models, sample)
+            translations = task.inference_step(generator, models, sample) 
+            # translations format:
+            # [
+            #     {
+            #         'tokens': tensor([...], device='cuda:0'),
+            #         'score': tensor(-8.3772, device='cuda:0'),
+            #         'attention': tensor([]),
+            #         'alignment': tensor([]),
+            #         'positional_scores': tensor([...], device='cuda:0')
+            #     }
+            # ]
             for i, (id, hypos) in enumerate(zip(batch.ids.tolist(), translations)):
-                src_tokens_i = utils.strip_pad(src_tokens[i], tgt_dict.pad())
+                src_tokens_i = utils.strip_pad(src_tokens[i], tgt_dict.pad()) #strip padding tokens (which should be the "1" token)
                 results.append((i + start_id, src_tokens_i, hypos))
-
+            #continue here!!!
             # sort output to match input order
-            for id, src_tokens, hypos in sorted(results, key=lambda x: x[0]):
+            for id, src_tokens, hypos in sorted(results, key=lambda x: x[0]): #unnecessary sorted
                 if src_dict is not None:
-                    src_str = src_dict.string(src_tokens, args.common_eval.post_process)
+                    src_str = src_dict.string(src_tokens, args.common_eval.post_process) #verbalizer
 
                 # Process top predictions
                 for hypo_id, hypo in enumerate(hypos):
@@ -276,19 +302,21 @@ def main(args):
                         tgt_dict=tgt_dict,
                         remove_bpe=args.common_eval.post_process,
                     )
-
+                    #breakpoint()
                     detok_hypo_str = hypo_str
                     utterance = detok_hypo_str
                     prediction = utterance.removeprefix(src_str).strip()
                     # assert utterance != prediction  # important when the generated sequence (max-len-b) is shorter than src
-
                     data_point = {
                         "file_name": data[id]["file_name"],
                         "src": data[id]["src"],
                         "label": data[id]["label"],
                         "predict": prediction,
+                        "confidence": torch.exp(hypo['positional_scores'][-2]).item(),  # confidence of the last token
                     }
 
+                    # print("confidence_map: ", token_confidence_map)
+                    
                     out_data[data[id]["id"]] = data_point
                 pbar.update(1)
             start_id += len(results)

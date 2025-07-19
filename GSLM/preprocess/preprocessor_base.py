@@ -32,12 +32,15 @@ class PreprocessorBase:
         python_file = os.path.join(prep_dir, "speech2unit/quantize_with_kmeans.py")
 
         for split in ["train", "valid", "test"]:
+            if self.datarc["skip_train_and_val"] and split in ["train", "valid"]:
+                continue
             manifest_path = Path(self.datarc["output_path"], "manifest", f"{split}.manifest")
             output_path = Path(self.datarc["output_path"], "quantized", f"{split}")
 
             subprocess.call(
                 [
                     "python",
+                    "-W", "ignore", #temporal ignore warnings
                     python_file,
                     "--feature_type",
                     self.fairseqrc["feature_type"],
@@ -64,6 +67,8 @@ class PreprocessorBase:
         )
 
         for split in ["train", "valid", "test"]:
+            if self.datarc["skip_train_and_val"] and split in ["train", "valid"]:
+                continue
             quantized_file_path = Path(self.datarc["output_path"], "quantized", f"{split}")
             output_path = Path(self.datarc["output_path"], "reduced_units", f"{split}")
 
@@ -87,6 +92,8 @@ class PreprocessorBase:
         # TODO : add merge the redundant parts
         if self.fairseqrc["LM_datatype"] == "src-only":
             for split in ["train", "valid", "test"]:
+                if self.datarc["skip_train_and_val"] and split in ["train", "valid"]:
+                    continue
                 ###########
                 #  input  #
                 ###########
@@ -112,6 +119,8 @@ class PreprocessorBase:
 
         elif self.fairseqrc["LM_datatype"] == "src-tgt":
             for split in ["train", "valid", "test"]:
+                if self.datarc["skip_train_and_val"] and split in ["train", "valid"]:
+                    continue
                 ###########
                 #  input  #
                 ###########
@@ -151,6 +160,24 @@ class PreprocessorBase:
 
     def all(self):
         self.generate_manifest()
+        self.quantize()
+        self.reduce_quantized()
+        self.create_lm_dataset()
+    
+    def custom_valid_all(self):
+        if not self.datarc["custom_validation"] or self.datarc["custom_validation"] is False:
+            print("[INFO] Custom validation is not enabled in dataset config. Skipping custom validation.")
+            return
+        if not self.datarc["custom_validation_protocal_path"] or not self.datarc["custom_validation_audio_path"]:
+            print("[ERROR] Custom validation protocal path or audio path is not specified in dataset config.")
+            return
+        self.generate_manifest_valid()
+        self.quantize()
+        self.reduce_quantized()
+        self.create_lm_dataset()
+    
+    def asv21_all(self):
+        self.generate_manifest_asv21()
         self.quantize()
         self.reduce_quantized()
         self.create_lm_dataset()

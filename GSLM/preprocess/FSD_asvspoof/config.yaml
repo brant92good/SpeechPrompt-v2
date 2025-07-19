@@ -6,3 +6,14 @@ datarc:
   output_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/s2u_preprocessed/asvspoof
   batch_size: 16
   num_workers: 8
+  
+  # The following parameters are used for the custom validation dataset
+  custom_validation: False
+  #for protocal file path
+  custom_validation_protocal_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/Klee_dataset/Klee_protocols/Klee_valid.txt
+  #for audio folder path(audio must be .flac)
+  custom_validation_audio_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/Klee_dataset/Klee_valid/flac
+  
+  #whether to skip training and validation preprocessing steps
+  skip_train_and_val: True
+

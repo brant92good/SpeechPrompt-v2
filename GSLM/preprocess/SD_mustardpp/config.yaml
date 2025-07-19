@@ -1,0 +1,10 @@
+name: "SD_mustardpp"
+taskrc:
+  merge: True
+  no_overlap: True
+datarc:
+  root_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/mustardpp/all_videos/final_utterance_videos_wav
+  output_path: /home/brant/Projects/clean-SP-v2/storage/GSLM/s2u_data/SD_mustardpp
+  csv_path: /home/brant/Projects/clean-SP-v2/storage/SpeechPrompt/datasets/mustardpp/mustard++_text.csv
+  batch_size: 32
+  num_workers: 2

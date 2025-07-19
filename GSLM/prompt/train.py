@@ -117,6 +117,7 @@ def main():
         --deep_prompt
     """
     fairseq_parser, fairseq_args = get_input_args()
+    print("\n"*5,fairseq_parser, fairseq_args, '\n'*5)
     cli_main(fairseq_parser, fairseq_args)
 
 
