@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug runner.py with downstream",
+      "type": "python",
+      "request": "launch",
+      "program": "runner.py",
+      "console": "integratedTerminal",
+      "args": ["--downstream", "FSD_asvspoof_silent"],
+      "python": "/home/brant/Project/MLentry/envs/SpeechPrompt_v2/bin/python",
+    }
+  ]
+}

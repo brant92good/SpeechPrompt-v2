@@ -1,4 +1,4 @@
-storage_dir: /home/brant/Projects/clean-SP-v2/storage/GSLM
+storage_dir: ../../../storage/GSLM
 
 prompt_param_filter:
   - "sep"
@@ -8,11 +8,13 @@ prompt_param_filter:
 task_num_classes:
   SCR_google_speech_commands: 12
   FSD_asvspoof: 2
+  FSD_asvspoof_silent: 2
   SD_mustard: 2
   SD_mustardpp: 2
 
 task_batch_size:
   SCR_google_speech_commands: 32
   FSD_asvspoof: 32
+  FSD_asvspoof_silent: 32
   SD_mustard: 32
   SD_mustardpp: 32

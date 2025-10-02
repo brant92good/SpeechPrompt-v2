@@ -1,9 +1,9 @@
-name: "FSD_asvspoof"
+name: "FSD_inthewild"
 taskrc:
   merge: True
 datarc:
-  root_path: ../../../datasets/ASV2019LA
-  output_path: ../../../storage/SpeechPrompt/s2u_preprocessed/asvspoof
+  root_path: ../../../datasets/InTheWild/release_in_the_wild
+  output_path: ../../../storage/SpeechPrompt/s2u_preprocessed/inthewild
   batch_size: 16
   num_workers: 8
   

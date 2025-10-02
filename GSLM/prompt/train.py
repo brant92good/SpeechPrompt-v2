@@ -43,7 +43,7 @@ def convert_to_fairseq_args(args):
     # https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-train
 
     bin_data_dir = storage_dir / "s2u_data" / args.downstream / f"{args.vb_method}_data_bin"
-    restore_file = storage_dir / "pretrained_models" / "GSLM" / "checkpoint_best.pt"
+    restore_file = storage_dir / ".." / ".." / "pretrained" / "GSLM" / "checkpoint_best.pt"
     tensorboard_logdir = storage_dir / "exp_results" / args.downstream / args.exp_name / "logs"
     save_dir = storage_dir / "exp_results" / args.downstream / args.exp_name / "checkpoints"
     path_args = [

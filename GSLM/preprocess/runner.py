@@ -3,10 +3,9 @@ from importlib.machinery import SourceFileLoader
 from pathlib import Path
 import git
 from pprint import pprint
-import IPython
 import yaml
 from model_downloader import ModelDownloader, GSLM_MODELS
-
+import pdb
 
 def main(args):
     ##########
@@ -23,6 +22,7 @@ def main(args):
             dataset_config = yaml.safe_load(f)
         except yaml.YAMLError as exc:
             print(exc)
+
 
     ######################
     # Pre-trained Models #

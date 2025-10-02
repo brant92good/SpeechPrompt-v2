@@ -1,9 +1,9 @@
-name: "FSD_asvspoof"
+name: "FSD_asvspoof_silent"
 taskrc:
   merge: True
 datarc:
-  root_path: ../../../datasets/ASV2019LA
-  output_path: ../../../storage/SpeechPrompt/s2u_preprocessed/asvspoof
+  root_path: ../../../datasets/silent_ASVspoof19LA
+  output_path: ../../../storage/SpeechPrompt/s2u_preprocessed/asvspoof_silent
   batch_size: 16
   num_workers: 8
   

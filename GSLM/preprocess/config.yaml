@@ -20,11 +20,11 @@
   fairseqrc:
     LM_datatype: src-only
     feature_type: hubert
-    download_models: True
-    download_model_dir: /home/brant/Projects/clean-SP-v2/storage/GSLM/pretrained_models/
-    ssl_model_path: /home/brant/Projects/clean-SP-v2/storage/GSLM/pretrained_models/HuBERT/hubert_base_ls960.pt
-    km_model_path: /home/brant/Projects/clean-SP-v2/storage/GSLM/pretrained_models/HuBERT/km.bin
+    download_models: False
+    download_model_dir: ../../../pretrained/
+    ssl_model_path: ../../../pretrained/HuBERT/hubert_base_ls960.pt
+    km_model_path: ../../../pretrained/HuBERT/km.bin
     layer: 6
 
   datarc:
-    output_dir: /home/brant/Projects/clean-SP-v2/storage/GSLM/s2u_data
+    output_dir: ../../../storage/GSLM/s2u_data

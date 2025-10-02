@@ -8,7 +8,7 @@ import utils
 def fairseq_preprocess(args):
     root_dir = utils.get_storage_dir()
     verbalized_dir = (Path(root_dir) / "s2u_data" / args.downstream / f"verbalized_{args.vb_method}_data").resolve()
-    dict_path = Path(root_dir) / "pretrained_models" / "GSLM" / "dict.txt"
+    dict_path = Path(root_dir) / ".." / ".." / "pretrained" / "GSLM" / "dict.txt"
     verbalize_method = args.vb_method
 
     dest_dir = verbalized_dir.parent / f"{verbalize_method}_data_bin"
