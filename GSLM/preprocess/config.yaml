@@ -20,7 +20,7 @@
   fairseqrc:
     LM_datatype: src-only
     feature_type: hubert
-    download_models: False
+    download_models: True
     download_model_dir: ../../../pretrained/
     ssl_model_path: ../../../pretrained/HuBERT/hubert_base_ls960.pt
     km_model_path: ../../../pretrained/HuBERT/km.bin
